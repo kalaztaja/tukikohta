@@ -15,35 +15,47 @@ export const UpcomingWeather = (props: UpcomingWeatherpropss) => {
   function getTemp() {
     if (props.forecast) {
       return (
-        <div className="grid grid-cols-4 w-full col-span-12">
+        <div className="pl-2 flex w-full flex-col  col-span-12">
           {generateTempRow(props.forecast.mornTemp.toString(), "AP")}
 
           {generateTempRow(props.forecast.dayTemp.toString(), "P")}
 
           {generateTempRow(props.forecast.eveTemp.toString(), "IP")}
-
-          {generateTempRow(props.forecast.nightTemp.toString(), "YÖ")}
         </div>
       );
     }
   }
   function generateTempRow(temp: string, label: string) {
     return (
-      <div className=" col-span-2 grid grid-cols-12 space-x-4">
-        <label className="col-span-2 pl-2 ">{label} </label>
-        <div className="col-span-10 ">{temp} C</div>
+      <div className="grid grid-cols-12 space-x-3">
+        <label className="pl-0 col-span-1">{label} </label>
+        <span className="col-span-8">{temp} C</span>
       </div>
     );
+  }
+  function getAdditionalInfo() {
+    if (props.forecast) {
+      return (
+        <div>
+          <span>Rain {props.forecast.rainPrcnt}%</span>
+
+          <span>Rain {props.forecast.rainPrcnt}mm</span>
+        </div>
+      );
+    }
   }
   return (
     <div className="bg-red-500 grid grid-cols-12 pb-4">
       <div className="col-span-1 col-start-6	content-center justify-center items-center">
         {getDayString()}
       </div>
-      <div className="col-span-12">
+      <div className="col-span-12 flex items-center justify-center">
         {getIcon(props.forecast.iconId ?? "error")}
       </div>
-      {getTemp()}
+      <div className="col-span-12 grid grid-cols-12">
+        <div className="col-span-6">{getTemp()}</div>
+        <div className="col-span-6">{getAdditionalInfo()}</div>
+      </div>
     </div>
   );
 };

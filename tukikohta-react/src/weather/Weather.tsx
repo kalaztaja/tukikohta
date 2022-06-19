@@ -114,11 +114,11 @@ export const Weather = () => {
   function weatherForecastElements() {
     if (weatherForecasts && weatherForecasts.length > 0) {
       return (
-        <>
+        <div className="col-span-12 flex">
           {weatherForecasts.map((forecast) => (
             <UpcomingWeather forecast={forecast} />
           ))}
-        </>
+        </div>
       );
     }
     return <></>;
@@ -128,7 +128,10 @@ export const Weather = () => {
       <div className="col-span-4">
         <MainWeather forecast={todaysWeather} />
       </div>
-      <div className="col-span-8">{weatherForecastElements()}</div>
+      <div className="col-span-8 grid grid-cols-12">
+        {weatherForecastElements()}
+        <div className="col-span-12 bg-black">jes</div>
+      </div>
     </div>
   );
 };
